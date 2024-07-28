@@ -8,6 +8,7 @@ This is a simple tool to replay messages from a file. It is of proof of concept 
 
 ```bash
 pip install conan
+conan profile detect # this command should be run only once
 conan install . -of build --build missing
 cd build 
 cmake ..

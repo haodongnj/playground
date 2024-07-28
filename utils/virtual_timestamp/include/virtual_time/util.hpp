@@ -2,4 +2,8 @@
 
 #include <cstdint>
 
-void printDaytimeFromNanoseconds(int64_t nanoseconds);
+namespace virtual_time {
+
+void PrintDaytimeFromNanoseconds(int64_t nanoseconds);
+
+}

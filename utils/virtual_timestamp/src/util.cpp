@@ -2,19 +2,27 @@
 #include <iomanip>
 #include <iostream>
 
-void printDaytimeFromNanoseconds(int64_t nanoseconds) {
-  // Convert nanoseconds to seconds using std::chrono
-  auto ns = std::chrono::nanoseconds(nanoseconds);
-  auto secs = std::chrono::duration_cast<std::chrono::seconds>(ns);
-  auto hrs = std::chrono::duration_cast<std::chrono::hours>(secs);
-  auto mins = std::chrono::duration_cast<std::chrono::minutes>(secs % std::chrono::hours(1));
-  auto secs_remainder = secs % std::chrono::minutes(1);
-  auto millis = std::chrono::duration_cast<std::chrono::milliseconds>(ns % std::chrono::seconds(1));
-  auto micros = std::chrono::duration_cast<std::chrono::microseconds>(ns % std::chrono::milliseconds(1));
-  auto nanos = ns % std::chrono::microseconds(1);
+namespace virtual_time {
 
-  // Output the result
-  std::cout << std::setfill('0') << std::setw(2) << hrs.count() << ":" << std::setw(2) << mins.count() << ":"
-            << std::setw(2) << secs_remainder.count() << "." << std::setw(3) << millis.count() << " " << std::setw(3)
-            << micros.count() << " " << std::setw(3) << nanos.count() << std::endl;
+void PrintDaytimeFromNanoseconds(int64_t nanoseconds) {
+  // Define a duration in nanoseconds
+  std::chrono::nanoseconds ns(nanoseconds);
+
+  // Convert to system_clock::time_point
+  std::chrono::system_clock::time_point tp(ns);
+
+  // Convert to time_t (seconds since epoch)
+  std::time_t time = std::chrono::system_clock::to_time_t(tp);
+
+  // Convert to local time struct
+  std::tm *localTime = std::localtime(&time);
+
+  // Extract milliseconds for display
+  int milliseconds = std::chrono::duration_cast<std::chrono::milliseconds>(ns % std::chrono::seconds(1)).count();
+
+  // Output the formatted time
+  std::cout << std::put_time(localTime, "%Y-%m-%d %H:%M:%S");
+  std::cout << '.' << std::setfill('0') << std::setw(3) << milliseconds << std::endl;
 }
+
+} // namespace virtual_time

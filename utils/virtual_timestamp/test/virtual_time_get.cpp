@@ -7,12 +7,12 @@
 int main() {
   int64_t timestamp;
   for (int i = 0; i < 20; i++) {
-    virtual_time::get_virtual_timestamp(timestamp);
+    virtual_time::VirtualTimeInstance().get(timestamp);
     std::cout << "Got timestamp: " << timestamp << std::endl;
     if (timestamp < 0) {
       std::cout << "No timestamp available" << std::endl;
     } else {
-      printDaytimeFromNanoseconds(timestamp);
+      virtual_time::PrintDaytimeFromNanoseconds(timestamp);
     }
 
     std::this_thread::sleep_for(std::chrono::seconds(1));

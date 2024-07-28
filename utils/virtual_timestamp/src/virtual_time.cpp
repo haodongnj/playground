@@ -2,14 +2,9 @@
 
 namespace virtual_time {
 
-void push_virtual_timestamp(int64_t timestamp, char const *const name, size_t size) {
+VirtualTime &VirtualTimeInstance(char const *const name, size_t size) {
   static VirtualTime virtual_time{name, size};
-  virtual_time.push(timestamp);
-}
-
-void get_virtual_timestamp(int64_t &timestamp, char const *const name, size_t size) {
-  static VirtualTime virtual_time{name, size};
-  virtual_time.get(timestamp);
+  return virtual_time;
 }
 
 } // namespace virtual_time

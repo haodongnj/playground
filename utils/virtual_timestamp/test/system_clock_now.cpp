@@ -1,3 +1,4 @@
+#include "virtual_time/util.hpp"
 #include <chrono>
 #include <iostream>
 #include <thread>
@@ -8,7 +9,8 @@ int main() {
     timestamp =
         std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::system_clock::now().time_since_epoch())
             .count();
-    std::cout << "Got timestamp: " << timestamp << std::endl;
+    std::cout << "#" << i << " got timestamp: " << timestamp << std::endl;
+    virtual_time::PrintDaytimeFromNanoseconds(timestamp);
     std::this_thread::sleep_for(std::chrono::seconds(1));
   }
 }
