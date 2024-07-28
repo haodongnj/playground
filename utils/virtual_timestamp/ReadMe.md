@@ -2,7 +2,7 @@
 
 ## Introduction
 
-It is simple proof of concept prototype project to hijack the `time` function in the `libc` library. The virtual time is stored in the shared memory, and the `time` function will return the virtual time instead of the real time.
+It is simple proof of concept prototype project to hijack the `clock_gettime` or `gettimeofday` function in the `libc` library. The virtual time is stored in the shared memory, and the hijacked functions will return the virtual time instead of the real system time.
 This can be useful for logsim replay and debugging, e.g. DDS replay.
 
 ## Build
@@ -19,7 +19,7 @@ make install
 
 ## Usage
 
-Hijack the `time` function in the `libc` library.
+Hijack the `clock_gettime` or `gettimeofday` function in the `libc` library.
 
 ```bash
 cd install
