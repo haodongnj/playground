@@ -1,2 +1,9 @@
 */.ipynb_checkpoints
 */jupyter/.ipynb_checkpoints/*
+
+.vscode
+**/.idea
+**/cmake-build-debug
+**/build
+
+**/CMakeUserPresets.json
