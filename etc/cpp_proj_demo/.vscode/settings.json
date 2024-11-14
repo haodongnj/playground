@@ -1,0 +1,10 @@
+{
+    "clangd.path": "/opt/homebrew/opt/llvm@17/bin/clangd",
+    "clangd.arguments": [
+        "--background-index",
+        "--header-insertion=iwyu",
+        "--clang-tidy",
+        "--completion-style=detailed",
+    ],
+    "editor.formatOnSave": true,
+}
