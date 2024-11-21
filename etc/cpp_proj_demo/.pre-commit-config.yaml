@@ -1,0 +1,9 @@
+repos:
+- repo: local
+  hooks:
+  - id: cppcheck CWE
+    name: cppcheck
+    entry: bash script/cppcheck_cwe.sh
+    language: system
+    types: [file]
+    files: ^.*\.(c|cpp|h|hpp)$
