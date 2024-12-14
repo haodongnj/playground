@@ -2,11 +2,12 @@
 
 #include <iostream>
 #include <memory>
+#include <utility>
 
 class Shape {
     public:
     template<typename T>
-    Shape(const T& t) : concept(new ShapeModel<T>(t)) {}
+    Shape(T&& t) : concept(new ShapeModel<T>(std::forward<T>(t))) {}
 
     private:
     class ShapeConcept {
@@ -18,7 +19,7 @@ class Shape {
     template<typename T>
     class ShapeModel : public ShapeConcept {
         public:
-        ShapeModel(const T& t) : impl(t) {}
+        ShapeModel(T&& t) : impl(std::forward<T>(t)) {}
         virtual void draw(std::ostream& os) const {
             impl.draw(os);
         }
